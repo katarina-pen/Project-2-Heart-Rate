@@ -15,7 +15,8 @@ void setup() {
 void loop() {
   
   if((digitalRead(10) == 1 )||(digitalRead(11) == 1)){
-   digitalWrite(ledPin, HIGH); //LED turns on
+  //  digitalWrite(ledPin, HIGH); //LED turns on
+    LEDblink (); 
     StayinAlive ();
     delay(1000); // ... for 1 second
    Serial.println('!'); //! prints in the serial monitor
@@ -31,6 +32,44 @@ void loop() {
   delay(1);
 }
 
+
+//function for lamp blinking
+void LEDblink () {
+  digitalWrite(ledPin, HIGH); //Baah 1
+  delay (400);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (400);
+  digitalWrite(ledPin, HIGH); //Baah 2
+  delay (400);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (400);
+  digitalWrite(ledPin, HIGH); //Baah 3
+  delay (400);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (400);
+  digitalWrite(ledPin, HIGH); //Baah 3
+  delay (400);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (400);
+
+  digitalWrite(ledPin, HIGH); //Stayin
+  delay (100);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (100);
+  digitalWrite(ledPin, HIGH); // Alive
+  delay (100);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (100);
+
+  digitalWrite(ledPin, HIGH); //Stayin
+  delay (100);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (100);
+  digitalWrite(ledPin, HIGH); // Alive
+  delay (100);
+  digitalWrite(ledPin, LOW); //LED turns off
+  delay (100);
+}
 
 // notes in the melody:
 int melody[] = {
