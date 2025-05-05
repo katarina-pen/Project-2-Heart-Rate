@@ -9,16 +9,14 @@ void setup() {
   pinMode(11, INPUT); // Setup for leads off detection LO -
   pinMode (ledPin, OUTPUT); //LED
   pinMode(buzzer, OUTPUT); //Piezo
-
 }
 
 void loop() {
   
   if((digitalRead(10) == 1 )||(digitalRead(11) == 1)){
-  //  digitalWrite(ledPin, HIGH); //LED turns on
-    LEDblink (); 
+    digitalWrite(ledPin, HIGH); //LED turns on
     StayinAlive ();
-    delay(1000); // ... for 1 second
+    //delay(1000); // ... for 1 second
    Serial.println('!'); //! prints in the serial monitor
   }
   else{
@@ -33,44 +31,6 @@ void loop() {
 }
 
 
-//function for lamp blinking
-void LEDblink () {
-  digitalWrite(ledPin, HIGH); //Baah 1
-  delay (400);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (400);
-  digitalWrite(ledPin, HIGH); //Baah 2
-  delay (400);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (400);
-  digitalWrite(ledPin, HIGH); //Baah 3
-  delay (400);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (400);
-  digitalWrite(ledPin, HIGH); //Baah 3
-  delay (400);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (400);
-
-  digitalWrite(ledPin, HIGH); //Stayin
-  delay (100);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (100);
-  digitalWrite(ledPin, HIGH); // Alive
-  delay (100);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (100);
-
-  digitalWrite(ledPin, HIGH); //Stayin
-  delay (100);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (100);
-  digitalWrite(ledPin, HIGH); // Alive
-  delay (100);
-  digitalWrite(ledPin, LOW); //LED turns off
-  delay (100);
-}
-
 // notes in the melody:
 int melody[] = {
   NOTE_C4, NOTE_AS3, NOTE_GS3, NOTE_G3,     // C B♭ A♭ G // Ah, ha, ha, ha
@@ -80,22 +40,27 @@ int melody[] = {
 
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
 int noteDurations[] = {
-  2, 2, 2, 2,   // Ah, ha, ha, ha
-  8, 8, 8, 2,   // stayin' a-live
-  8, 8, 8, 2    // stayin' a-live
+  4, 4, 4, 4,   // Ah, ha, ha, ha
+  16, 16, 16, 3,   // stayin' a-live
+  16, 16, 16, 3    // stayin' a-live
 };
 // Function for melody
 // iterate over the notes of the melody:
 void StayinAlive () {
   for (int thisNote = 0; thisNote < 12; thisNote++) {
 
-    // to calculate the note duration, take one second divided by the note type.
-
-    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
-
     int noteDuration = 1000 / noteDurations[thisNote];
 
     tone(8, melody[thisNote], noteDuration);
+
+     // Turn LED on
+    digitalWrite(ledPin, HIGH);
+
+    // Wait for the duration of the note
+    delay(noteDuration);
+
+    // Turn LED off
+    digitalWrite(ledPin, LOW);
 
     // to distinguish the notes, set a minimum time between them.
 
